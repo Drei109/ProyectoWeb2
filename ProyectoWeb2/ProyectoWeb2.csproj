@@ -97,6 +97,7 @@
     <Content Include="assets\images\logo-light-icon.png" />
     <Content Include="assets\images\logo-light-text.png" />
     <Content Include="assets\images\logo-text.png" />
+    <Content Include="assets\images\users\userDef.png" />
     <Content Include="assets\main\css\animate.css" />
     <Content Include="assets\main\css\colors\blue-dark.css" />
     <Content Include="assets\main\css\colors\blue.css" />
@@ -471,6 +472,7 @@
     <Content Include="assets\plugins\chartist-plugin-tooltip-master\tasks\umd.js" />
     <Content Include="assets\plugins\chartist-plugin-tooltip-master\test\runner.html" />
     <Content Include="assets\plugins\chartist-plugin-tooltip-master\test\spec\spec-tooltip.js" />
+    <Content Include="assets\plugins\css-chart\css-chart.css" />
     <Content Include="assets\plugins\echarts\echarts-all-old.js" />
     <Content Include="assets\plugins\echarts\echarts-all.js" />
     <Content Include="assets\plugins\echarts\echarts-init.js" />
