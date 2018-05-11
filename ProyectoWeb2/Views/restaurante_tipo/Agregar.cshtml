@@ -1,0 +1,57 @@
+﻿@model ProyectoWeb2.Models.restaurante_tipo
+@{
+    ViewBag.Title = (Model.restaurante_tipo_id > 0 ? "" : "Nuevo Registro");
+    List<ProyectoWeb2.Models.restaurante> restaurante = ViewBag.Restaurante;
+    List<ProyectoWeb2.Models.tipo_restaurante> tipo = ViewBag.Tipo;
+}
+
+<h2>Agregar</h2>
+<ol class="breadcrumb">
+    <li><a href="~/restaurante_tipo">Restaurante Tipo</a></li>
+    <li class="active">@(Model.restaurante_tipo_id > 0 ? "" : "Nuevo Registro")</li>
+</ol>
+
+@using (Html.BeginForm("Guardar", "restaurante_tipo", FormMethod.Post, new
+{
+    id = "frm-categoria"
+
+}))
+{
+    @Html.HiddenFor(x => x.restaurante_tipo_id)
+    <div class="panel panel-default">
+        <div class="panel-heading">Informacion del Restaurante</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Label("ID:")
+                @Html.TextBoxFor(x => x.restaurante_tipo_id, new { @class = "form-control", disabled = true })
+            </div>
+            <div class="form-group">
+                @Html.Label("Restaurante:")
+                <select name="restaurante_id_fk" class="form-control">
+                    <option @(Model.restaurante_id_fk.Equals("") ? "selected" : "") value="">-Seleccione</option>
+                    @foreach (var p in restaurante)
+                    {
+                        <option @(Model.restaurante_id_fk.Equals(p.restaurante_id) ? "Selected" : ""  ) value="@p.restaurante_id">@p.nombre</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.restaurante_id_fk, null, new { @class = "label label-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Tipo:")
+                <select name="tipo_restaurante_id_fk" class="form-control">
+                    <option @(Model.tipo_restaurante_id_fk.Equals("") ? "selected" : "") value="">-Seleccione</option>
+                    @foreach (var p in tipo)
+                    {
+                        <option @(Model.tipo_restaurante_id_fk.Equals(p.tipo_restaurante_id) ? "Selected" : ""  ) value="@p.tipo_restaurante_id">@p.descripcion</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.tipo_restaurante_id_fk, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/restaurante" class="btn btn-danger">Cancelar</a>
+    </div>
+
+}

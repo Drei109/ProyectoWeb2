@@ -1,0 +1,69 @@
+﻿@model ProyectoWeb2.Models.empresa_restaurante_usuario
+@{
+    ViewBag.Title = (Model.restaurante_usuario_id > 0 ? "": "Nuevo Registro");
+    List<ProyectoWeb2.Models.empresa> empresa = ViewBag.Empresa;
+    List<ProyectoWeb2.Models.restaurante> restaurante = ViewBag.Restaurante;
+    List<ProyectoWeb2.Models.usuario> usuario = ViewBag.Usuario;
+}
+
+<h2>Agregar</h2>
+<ol class="breadcrumb">
+    <li><a href="~/empresa_restaurante_usuario">Empresa Usuario y Restaurante</a></li>
+    <li class="active">@(Model.restaurante_usuario_id > 0 ? "" : "Nuevo Registro")</li>
+</ol>
+
+@using (Html.BeginForm("Guardar", "empresa_restaurante_usuario", FormMethod.Post, new
+{
+    id = "frm-categoria"
+
+}))
+{
+    @Html.HiddenFor(x => x.restaurante_usuario_id)
+    <div class="panel panel-default">
+        <div class="panel-heading">Informacion General</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Label("ID:")
+                @Html.TextBoxFor(x => x.restaurante_usuario_id, new { @class = "form-control", disabled = true })
+            </div>
+            <div class="form-group">
+                @Html.Label("Empresa:")
+                <select name="empresa_id_fk" class="form-control">
+                    <option @(Model.empresa_id_fk.Equals("") ? "selected" : "") value="">-Seleccione</option>
+                    @foreach (var p in empresa)
+                    {
+                        <option @(Model.empresa_id_fk.Equals(p.empresa_id) ? "Selected" : ""  ) value="@p.empresa_id">@p.nombre</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.empresa_id_fk, null, new { @class = "label label-danger" })
+            </div>          
+            <div class="form-group">
+                @Html.Label("Restaurante:")
+                <select name="resturante_id_fk" class="form-control">
+                    <option @(Model.resturante_id_fk.Equals("") ? "selected" : "") value="">-Seleccione</option>
+                    @foreach (var p in restaurante)
+                    {
+                        <option @(Model.resturante_id_fk.Equals(p.restaurante_id) ? "Selected" : ""  ) value="@p.restaurante_id">@p.nombre</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.resturante_id_fk, null, new { @class = "label label-danger" })
+            </div>          
+            <div class="form-group">
+                @Html.Label("Usuario:")
+                <select name="usuario_id_fk" class="form-control">
+                    <option @(Model.usuario_id_fk.Equals("") ? "selected" : "") value="">-Seleccione</option>
+                    @foreach (var p in usuario)
+                    {
+                        <option @(Model.usuario_id_fk.Equals(p.usuario_id) ? "Selected" : ""  ) value="@p.usuario_id">@p.usuario1</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.usuario_id_fk, null, new { @class = "label label-danger" })
+            </div>          
+        </div>
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/empresa_restaurante_usuario" class="btn btn-danger">Cancelar</a>
+    </div>
+
+}

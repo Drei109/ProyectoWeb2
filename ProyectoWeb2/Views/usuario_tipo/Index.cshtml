@@ -1,0 +1,39 @@
+﻿@model List<ProyectoWeb2.Models.usuario_tipo>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-header"><a href="~/usuario_tipo/Agregar" class="btn btn-default pull right">Nuevo Tipo Restaurante </a>Tipo Restaurante</h2>
+
+
+@using (Html.BeginForm("Index", "usuario_tipo", FormMethod.Post, new { criterio = "frm-buscar" }))
+
+{
+    <div class="text-left">
+        @Html.Label("Buscar:")
+        @Html.TextBox("Criterio")
+        <button type="submit" class="btn btn-info" value="Buscar">Buscar</button>
+    </div>
+}
+<table id="ejemplo2" class="table">
+    <thead>
+        <tr>
+            <th style="width:50px">ID</th>
+            <th style="width:50px">Nombre</th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@(item.usuario_tipo_id)</th>
+                <th>@(item.descripcion)</th>
+                <th style="align-content:center;">                    
+                    <a href="~/usuario_tipo/Agregar/@item.usuario_tipo_id" class="btn btn-warning">Modificar</a>
+                    <a href="~/usuario_tipoeliminar/@item.usuario_tipo_id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

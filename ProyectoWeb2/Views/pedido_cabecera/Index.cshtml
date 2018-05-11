@@ -1,0 +1,44 @@
+﻿@model List<ProyectoWeb2.Models.pedido_cabecera>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-header"><a href="~/pedido_cabecera/Agregar" class="btn btn-default pull right">Nuevo Cabecera </a>Cabecera del Pedido</h2>
+
+
+@using (Html.BeginForm("Index", "pedido_cabecera", FormMethod.Post, new { criterio = "frm-buscar" }))
+
+{
+    <div class="text-left">
+        @Html.Label("Buscar:")
+        @Html.TextBox("Criterio")
+        <button type="submit" class="btn btn-info" value="Buscar">Buscar</button>
+    </div>
+}
+<table id="ejemplo2" class="table">
+    <thead>
+        <tr>
+            <th style="width:50px">ID</th>
+            <th style="width:50px">Mesa</th>
+            <th style="width:100px">Fecha</th>
+            <th style="width:100px">Precio Final</th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@(item.pedido_cabecera_id)</th>
+                <th>@(item.mesa_id_fk)</th>
+                <th>@(item.fecha)</th>
+                <th>@(item.precio_final)</th>
+                <th style="align-content:center;">
+                    <a href="~/pedido_cabecera/ver/@item.pedido_cabecera_id" class="btn btn-info">Ver detalles</a>
+                    <a href="~/pedido_cabecera/Agregar/@item.pedido_cabecera_id" class="btn btn-warning">Modificar</a>
+                    <a href="~/pedido_cabecera/eliminar/@item.pedido_cabecera_id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+﻿@model List<ProyectoWeb2.Models.empresa_restaurante_usuario>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-header"><a href="~/empresa_restaurante_usuario/Agregar" class="btn btn-default pull right">Nueva Empresa Restaurante</a>Empresa Restaurante</h2>
+
+
+@using (Html.BeginForm("Index", "empresa_restaurante_usuario", FormMethod.Post, new { criterio = "frm-buscar" }))
+
+{
+    <div class="text-left">
+        @Html.Label("Buscar:")
+        @Html.TextBox("Criterio")
+        <button type="submit" class="btn btn-info" value="Buscar">Buscar</button>
+    </div>
+}
+<table id="ejemplo2" class="table">
+    <thead>
+        <tr>
+            <th style="width:50px">ID</th>
+            <th style="width:50px">Empresa</th>
+            <th style="width:100px">Restaurante</th>
+            <th style="width:50px">Usuario</th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@(item.restaurante_usuario_id )</th>
+                <th>@(item.empresa.nombre)</th>
+                <th>@(item.restaurante.nombre)</th>
+                <th>@(item.usuario.nombre)</th>
+                <th style="align-content:center;">                  
+                    <a href="~/empresa_restaurante_usuario/Agregar/@item.restaurante_usuario_id" class="btn btn-warning">Modificar</a>
+                    <a href="~/empresa_restaurante_usuario/eliminar/@item.restaurante_usuario_id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

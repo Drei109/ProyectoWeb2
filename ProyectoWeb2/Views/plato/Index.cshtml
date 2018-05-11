@@ -1,0 +1,52 @@
+﻿@model List<ProyectoWeb2.Models.plato>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-header"><a href="~/plato/Agregar" class="btn btn-default pull right">Nuevo Plato </a>Plato</h2>
+
+
+@using (Html.BeginForm("Index", "plato", FormMethod.Post, new { criterio = "frm-buscar" }))
+
+{
+    <div class="text-left">
+        @Html.Label("Buscar:")
+        @Html.TextBox("Criterio")
+        <button type="submit" class="btn btn-info" value="Buscar">Buscar</button>
+    </div>
+}
+<table id="ejemplo2" class="table">
+    <thead>
+        <tr>
+            <th style="width:50px">ID</th>
+            <th style="width:50px">Restaurante</th>
+            <th style="width:100px">Nombre</th>
+            <th style="width:100px">Categoria</th>
+            <th style="width:100px">Precio</th>
+            <th style="width:100px">Descripcion</th>
+            <th style="width:100px">Foto</th>
+            <th style="width:100px">Estado</th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@(item.plato_id)</th>
+                <th>@(item.restaurante.nombre)</th>
+                <th>@(item.nombre)</th>
+                <th>@(item.plato_categoria.nombre)</th>
+                <th>@(item.precio)</th>
+                <th>@(item.descripcion)</th>
+                <th>@(item.foto)</th>
+                <th>@(item.estado)</th>
+                <th style="align-content:center;">
+                    <a href="~/plato/ver/@item.plato_id" class="btn btn-info">Ver detalles</a>
+                    <a href="~/plato/Agregar/@item.plato_id" class="btn btn-warning">Modificar</a>
+                    <a href="~/plato/eliminar/@item.plato_id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

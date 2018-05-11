@@ -568,6 +568,20 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\empresaController.cs" />
+    <Compile Include="Controllers\empresa_restaurante_usuarioController.cs" />
+    <Compile Include="Controllers\estado_empresaController.cs" />
+    <Compile Include="Controllers\estado_usuarioController.cs" />
+    <Compile Include="Controllers\mesaController.cs" />
+    <Compile Include="Controllers\pedido_detalleController.cs" />
+    <Compile Include="Controllers\pedido_cabeceraController.cs" />
+    <Compile Include="Controllers\platoController.cs" />
+    <Compile Include="Controllers\plato_categoriaController.cs" />
+    <Compile Include="Controllers\restauranteController.cs" />
+    <Compile Include="Controllers\restaurante_tipoController.cs" />
+    <Compile Include="Controllers\tipo_restauranteController.cs" />
+    <Compile Include="Controllers\usuarioController.cs" />
+    <Compile Include="Controllers\usuario_tipoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -860,6 +874,34 @@
     <Content Include="assets\main\scss\style.scss" />
     <Content Include="assets\main\scss\variable.scss" />
     <Content Include="assets\main\scss\widgets.scss" />
+    <Content Include="Views\empresa_restaurante_usuario\Index.cshtml" />
+    <Content Include="Views\empresa\Index.cshtml" />
+    <Content Include="Views\estado_empresa\Index.cshtml" />
+    <Content Include="Views\estado_usuario\Index.cshtml" />
+    <Content Include="Views\mesa\Index.cshtml" />
+    <Content Include="Views\pedido_detalle\Index.cshtml" />
+    <Content Include="Views\pedido_cabecera\Index.cshtml" />
+    <Content Include="Views\plato\Index.cshtml" />
+    <Content Include="Views\plato_categoria\Index.cshtml" />
+    <Content Include="Views\restaurante\Index.cshtml" />
+    <Content Include="Views\restaurante_tipo\Index.cshtml" />
+    <Content Include="Views\tipo_restaurante\Index.cshtml" />
+    <Content Include="Views\usuario\Index.cshtml" />
+    <Content Include="Views\usuario_tipo\Index.cshtml" />
+    <Content Include="Views\empresa_restaurante_usuario\Agregar.cshtml" />
+    <Content Include="Views\empresa\Agregar.cshtml" />
+    <Content Include="Views\estado_empresa\Agregar.cshtml" />
+    <Content Include="Views\estado_usuario\Agregar.cshtml" />
+    <Content Include="Views\mesa\Agregar.cshtml" />
+    <Content Include="Views\pedido_cabecera\Agregar.cshtml" />
+    <Content Include="Views\pedido_detalle\Agregar.cshtml" />
+    <Content Include="Views\plato_categoria\Agregar.cshtml" />
+    <Content Include="Views\plato\Agregar.cshtml" />
+    <Content Include="Views\restaurante_tipo\Agregar.cshtml" />
+    <Content Include="Views\restaurante\Agregar.cshtml" />
+    <Content Include="Views\tipo_restaurante\Agregar.cshtml" />
+    <Content Include="Views\usuario_tipo\Agregar.cshtml" />
+    <Content Include="Views\usuario\Agregar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

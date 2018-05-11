@@ -1,0 +1,55 @@
+﻿@model ProyectoWeb2.Models.empresa
+@{
+    ViewBag.Title = (Model.empresa_id > 0 ? Model.nombre : "Nuevo Registro");
+    List<ProyectoWeb2.Models.estado_empresa> estado = ViewBag.Estado;
+}
+
+<h2>Agregar</h2>
+<ol class="breadcrumb">
+    <li><a href="~/empresa">Empresa</a></li>
+    <li class="active">@(Model.empresa_id > 0 ? Model.nombre : "Nuevo Registro")</li>
+</ol>
+
+@using (Html.BeginForm("Guardar", "empresa", FormMethod.Post, new
+{
+    id = "frm-categoria"
+
+}))
+{
+    @Html.HiddenFor(x => x.empresa_id)
+    <div class="panel panel-default">
+        <div class="panel-heading">Informacion de la Categoria</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Label("ID:")
+                @Html.TextBoxFor(x => x.empresa_id, new { @class = "form-control", disabled = true })
+            </div>
+            <div class="form-group">
+                @Html.Label("Estado:")
+                <select name="estado_empresa_id_fk" class="form-control">
+                    <option @(Model.estado_empresa_id_fk.Equals("") ? "selected" : "") value="">-Seleccione</option>
+                    @foreach (var p in estado)
+                    {
+                        <option @(Model.estado_empresa_id_fk.Equals(p.estado_empresa_id) ? "Selected" : ""  ) value="@p.estado_empresa_id">@p.nombre</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.estado_empresa_id_fk, null, new { @class = "label label-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Nombre:")
+                @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.nombre, null, new { @class = "label label-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Descripcion:")
+                @Html.TextBoxFor(x => x.descripcion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.descripcion, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/empresa" class="btn btn-danger">Cancelar</a>
+    </div>
+
+}

@@ -1,0 +1,39 @@
+﻿@model List<ProyectoWeb2.Models.estado_empresa>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-header"><a href="~/estado_empresa/Agregar" class="btn btn-default pull right">Nueva Estado Empresa</a>Estado Empresa</h2>
+
+
+@using (Html.BeginForm("Index", "estado_empresa", FormMethod.Post, new { criterio = "frm-buscar" }))
+
+{
+    <div class="text-left">
+        @Html.Label("Buscar:")
+        @Html.TextBox("Criterio")
+        <button type="submit" class="btn btn-info" value="Buscar">Buscar</button>
+    </div>
+}
+<table id="ejemplo2" class="table">
+    <thead>
+        <tr>
+            <th style="width:50px">ID</th>
+            <th style="width:50px">Nombre</th>          
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@(item.estado_empresa_id)</th>
+                <th>@(item.nombre)</th>                
+                <th style="align-content:center;">                 
+                    <a href="~/estado_empresa/Agregar/@item.estado_empresa_id" class="btn btn-warning">Modificar</a>
+                    <a href="~/estado_empresa/eliminar/@item.estado_empresa_id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

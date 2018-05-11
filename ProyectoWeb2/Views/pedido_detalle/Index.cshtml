@@ -1,0 +1,44 @@
+﻿@model List<ProyectoWeb2.Models.pedido_detalle>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-header"><a href="~/pedido_detalle/Agregar" class="btn btn-default pull right">Nuevo Detalle </a>Detalle del Pedido</h2>
+
+
+@using (Html.BeginForm("Index", "pedido_detalle", FormMethod.Post, new { criterio = "frm-buscar" }))
+
+{
+    <div class="text-left">
+        @Html.Label("Buscar:")
+        @Html.TextBox("Criterio")
+        <button type="submit" class="btn btn-info" value="Buscar">Buscar</button>
+    </div>
+}
+<table id="ejemplo2" class="table">
+    <thead>
+        <tr>
+            <th style="width:50px">ID</th>
+            <th style="width:50px">Plato</th>
+            <th style="width:100px">Cantidad</th>
+            <th style="width:100px">Precio</th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@(item.pedido_detalle_id)</th>
+                <th>@(item.plato.nombre)</th>
+                <th>@(item.cantidad)</th>
+                <th>@(item.precio)</th>
+                <th style="align-content:center;">
+                    <a href="~/pedido_detalle/ver/@item.pedido_detalle_id" class="btn btn-info">Ver detalles</a>
+                    <a href="~/pedido_detalle/Agregar/@item.pedido_detalle_id" class="btn btn-warning">Modificar</a>
+                    <a href="~/pedido_detalle/eliminar/@item.pedido_detalle_id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
