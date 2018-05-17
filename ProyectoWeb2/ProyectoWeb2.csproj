@@ -572,6 +572,7 @@
     <Compile Include="Controllers\empresa_restaurante_usuarioController.cs" />
     <Compile Include="Controllers\estado_empresaController.cs" />
     <Compile Include="Controllers\estado_usuarioController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\mesaController.cs" />
     <Compile Include="Controllers\pedido_detalleController.cs" />
     <Compile Include="Controllers\pedido_cabeceraController.cs" />
@@ -902,6 +903,7 @@
     <Content Include="Views\tipo_restaurante\Agregar.cshtml" />
     <Content Include="Views\usuario_tipo\Agregar.cshtml" />
     <Content Include="Views\usuario\Agregar.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
