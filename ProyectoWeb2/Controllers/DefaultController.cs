@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ProyectoWeb2.Controllers
 {
+    [Authorize]
     public class DefaultController : Controller
     {
         // GET: Default
