@@ -4,10 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ProyectoWeb2.Models
+namespace ProyectoWeb2.ViewModels
 {
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Nombre de usuario")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]

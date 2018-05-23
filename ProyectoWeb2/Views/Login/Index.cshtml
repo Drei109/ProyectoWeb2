@@ -51,13 +51,20 @@
                         <h3 class="box-title m-b-20">Inicio de Sesión</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                @Html.TextBoxFor(m => m.Email, "Email", new { @class = "form-control" })
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                @Html.TextBoxFor(m => m.Email, "Email", new { @class = "form-control", @type="email", @placeholder = "Usuario", required="required" })
+                                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "label label-danger" })
                                 @*<input class="form-control" type="text" required="" placeholder="Usuario">*@
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                @Html.TextBoxFor(m => m.PasswordHash, "Password", new {@class="form-control"})
+                                @Html.TextBoxFor(m => m.PasswordHash, "Password", new {@class="form-control", @type = "password", @placeholder = "Password", required = "required" })
+                                @Html.ValidationMessageFor(x => x.PasswordHash, null, new { @class = "label label-danger" })
                                 @*<input class="form-control" type="password" required="" placeholder="Password">*@
                             </div>
                         </div>
@@ -85,7 +92,7 @@
                         </div>
                         <div class="form-group m-b-0">
                             <div class="col-sm-12 text-center">
-                                <p>¿No tienes una cuenta? <a href="register.html" class="text-info m-l-5"><b>Registrate</b></a></p>
+                                <p>¿No tienes una cuenta? <a href="/Login/Register" class="text-info m-l-5"><b>Regístrate</b></a></p>
                             </div>
                         </div>
                     </form>
@@ -133,8 +140,12 @@
     <!--Custom JavaScript -->
     <script src="~/assets/main/js/custom.min.js"></script>
     <!-- ============================================================== -->
-    <!-- Style switcher -->
+    <!-- Validate -->
     <!-- ============================================================== -->
-    <script src="~/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="~/assets/main/js/jquery.validate-vsdoc.js"></script>
+    <script src="~/assets/main/js/jquery.validate.js"></script>
+    <script src="~/assets/main/js/jquery.validate.min.js"></script>
+    <script src="~/assets/main/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/assets/main/js/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

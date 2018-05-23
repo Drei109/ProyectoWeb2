@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using ProyectoWeb2.Models;
+using ProyectoWeb2.ViewModels;
 
 namespace ProyectoWeb2.Controllers
 {
@@ -23,7 +26,7 @@ namespace ProyectoWeb2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(ApplicationUser model, string returnUrl)
+        public async Task<ActionResult> Login(ApplicationUser model, string returnUrl="/Default/Index")
         {
             if (!ModelState.IsValid)
             {
@@ -122,6 +125,22 @@ namespace ProyectoWeb2.Controllers
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Login");
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
             }
         }
     }

@@ -23,6 +23,11 @@ namespace ProyectoWeb2.Models
 
         public int estado_empresa_id_fk { get; set; }
 
+
+        [Required]
+        [StringLength(11)]
+        public string ruc { get; set; }
+
         [Required]
         [StringLength(100)]
         public string nombre { get; set; }
