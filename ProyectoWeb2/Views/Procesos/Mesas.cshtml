@@ -1,0 +1,46 @@
+﻿@using ProyectoWeb2.Models
+@{
+    var mesa = new mesa();
+    List<mesa> mesas = mesa.Listar();
+    var ribboncolor = "ribbon-info";
+}
+
+<div class="row card-columns">
+    @foreach (var m in mesas)
+    {
+        if (m.estado.Equals("Inactivo")) { ribboncolor = "ribbon-danger"; }
+        if (m.estado.Equals("Activo")) { ribboncolor = "ribbon-info"; }
+        <div class="col-lg-4 col-md-6 col-xlg-2 col-xs-12">
+            <div class="ribbon-wrapper card">
+                <div class="ribbon @ribboncolor">
+                    Mesa @m.mesa_id
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xlg-4 col-xs-4">
+                        <img src="~/Uploads/mesa@(m.mesa_id).png" alt="QR" />
+                    </div>
+                </div>
+
+                <div class="row m-t-10">
+                    <div class="col-lg-5 col-md-5 col-xlg-5 col-xs-5">
+                        <a href="/Procesos/Mesas/GenerarQR/@m.mesa_id" class="btn btn-outline-success"><i class="fa fa-check"></i>Generar QR</a>
+                    </div>
+                    @if (m.estado.Equals("Activo"))
+                    {
+                        <div class="col-lg-6 col-md-6 col-xlg-6 col-xs-6">
+                            <a href="/Procesos/Mesas/Desactivar/@m.mesa_id" class="btn btn-outline-warning"><i class="fa fa-check"></i>Desactivar Mesa</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-6 col-md-6 col-xlg-6 col-xs-6">
+                            <a href="/Procesos/Mesas/Activar/@m.mesa_id" class="btn btn-outline-warning"><i class="fa fa-check"></i>Activar Mesa</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

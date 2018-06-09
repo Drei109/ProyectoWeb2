@@ -7,13 +7,13 @@ namespace ProyectoWeb2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class FixedRucColumnNameInEmpresa : IMigrationMetadata
+    public sealed partial class AddColumnEstado : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FixedRucColumnNameInEmpresa));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddColumnEstado));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805230457155_FixedRucColumnNameInEmpresa"; }
+            get { return "201805251539590_AddColumnEstado"; }
         }
         
         string IMigrationMetadata.Source

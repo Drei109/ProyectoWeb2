@@ -1,12 +1,13 @@
+using System.Data.Entity;
+using System.Linq;
+
 namespace ProyectoWeb2.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Linq;
 
     public partial class empresa_restaurante_usuario
     {
@@ -17,14 +18,14 @@ namespace ProyectoWeb2.Models
 
         public int? resturante_id_fk { get; set; }
 
-        public int usuario_id_fk { get; set; }
+        [StringLength(128)]
+        public string usuarioASP_fk_Id { get; set; }
+
+        public virtual AspNetUsers AspNetUsers { get; set; }
 
         public virtual empresa empresa { get; set; }
 
         public virtual restaurante restaurante { get; set; }
-
-        public virtual usuario usuario { get; set; }
-
 
         public List<empresa_restaurante_usuario> Listar()
         {

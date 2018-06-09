@@ -13,7 +13,8 @@ namespace ProyectoWeb2.Models
         {
             AspNetUserClaims = new HashSet<AspNetUserClaims>();
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            AspNetRoles = new HashSet<AspNetRoles>();
+            empresa_restaurante_usuario = new HashSet<empresa_restaurante_usuario>();
+            AspNetRoles = new HashSet<AspNetUserRoles>();
         }
 
         public string Id { get; set; }
@@ -50,6 +51,9 @@ namespace ProyectoWeb2.Models
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<empresa_restaurante_usuario> empresa_restaurante_usuario { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserRoles> AspNetRoles { get; set; }
     }
 }

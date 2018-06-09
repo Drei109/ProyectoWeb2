@@ -1,12 +1,13 @@
+using System.Data.Entity;
+using System.Linq;
+
 namespace ProyectoWeb2.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Linq;
 
     [Table("plato")]
     public partial class plato
@@ -57,7 +58,7 @@ namespace ProyectoWeb2.Models
             {
                 using (var db = new RrestauranteModel())
                 {
-                    empre = db.plato.ToList();
+                    empre = db.plato.Include(r => r.restaurante).Include(p => p.plato_categoria).ToList();
                 }
             }
             catch (Exception ex)

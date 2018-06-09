@@ -7,13 +7,13 @@ namespace ProyectoWeb2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialModel : IMigrationMetadata
+    public sealed partial class firstMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(firstMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805230435159_InitialModel"; }
+            get { return "201805251512051_firstMigration"; }
         }
         
         string IMigrationMetadata.Source

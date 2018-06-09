@@ -1,46 +1,43 @@
+using System.Data.Entity;
+using System.Linq;
+
 namespace ProyectoWeb2.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Linq;
 
     [Table("empresa")]
     public partial class empresa
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public empresa()
         {
             empresa_restaurante_usuario = new HashSet<empresa_restaurante_usuario>();
             restaurante = new HashSet<restaurante>();
         }
 
-        [Key]
-        public int empresa_id { get; set; }
+        [Key] public int empresa_id { get; set; }
 
         public int estado_empresa_id_fk { get; set; }
 
+        [Required] [StringLength(100)] public string nombre { get; set; }
 
-        [Required]
-        [StringLength(11)]
-        public string ruc { get; set; }
+        [Column(TypeName = "text")] public string descripcion { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string nombre { get; set; }
-
-        [Column(TypeName = "text")]
-        public string descripcion { get; set; }
+        [Required] [StringLength(11)] public string ruc { get; set; }
 
         public virtual estado_empresa estado_empresa { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<empresa_restaurante_usuario> empresa_restaurante_usuario { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<restaurante> restaurante { get; set; }
 
         public List<empresa> Listar()
@@ -58,8 +55,10 @@ namespace ProyectoWeb2.Models
                 throw ex;
 
             }
+
             return empre;
         }
+
         public empresa Obtener(int id)
         {
             var empre = new empresa();
@@ -76,8 +75,10 @@ namespace ProyectoWeb2.Models
                 throw ex;
 
             }
+
             return empre;
         }
+
         public List<empresa> buscar(string criterio)
         {
             var empre = new List<empresa>();
@@ -85,7 +86,8 @@ namespace ProyectoWeb2.Models
             {
                 using (var db = new RrestauranteModel())
                 {
-                    empre = db.empresa.Include("estado_empresa").Where(x => x.nombre.Contains(criterio) || x.descripcion.Contains(criterio)).ToList();
+                    empre = db.empresa.Include("estado_empresa")
+                        .Where(x => x.nombre.Contains(criterio) || x.descripcion.Contains(criterio)).ToList();
 
 
                 }
@@ -95,8 +97,10 @@ namespace ProyectoWeb2.Models
                 throw ex;
 
             }
+
             return empre;
         }
+
         public void guardar()
         {
             try
@@ -111,6 +115,7 @@ namespace ProyectoWeb2.Models
                     {
                         db.Entry(this).State = EntityState.Added;
                     }
+
                     db.SaveChanges();
                 }
             }
@@ -121,6 +126,7 @@ namespace ProyectoWeb2.Models
             }
 
         }
+
         public void eliminar()
         {
             try
@@ -139,7 +145,6 @@ namespace ProyectoWeb2.Models
                 throw ex;
 
             }
-
         }
     }
 }

@@ -1,12 +1,13 @@
+using System.Data.Entity;
+using System.Linq;
+
 namespace ProyectoWeb2.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Linq;
 
     [Table("mesa")]
     public partial class mesa
@@ -38,7 +39,7 @@ namespace ProyectoWeb2.Models
             {
                 using (var db = new RrestauranteModel())
                 {
-                    empre = db.mesa.ToList();
+                    empre = db.mesa.Include(r=>r.restaurante).ToList();
                 }
             }
             catch (Exception ex)
@@ -127,7 +128,47 @@ namespace ProyectoWeb2.Models
                 throw ex;
 
             }
+        }
 
+
+        public mesa ActivarMesa(int id)
+        {
+            var mesa = new mesa();
+            try
+            {
+                using (var db = new RrestauranteModel())
+                {
+                    mesa = db.mesa.Find(id);
+                    mesa.estado = "Activo";
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            return mesa;
+        }
+
+        public mesa DesactivarMesa(int id)
+        {
+            var mesa = new mesa();
+            try
+            {
+                using (var db = new RrestauranteModel())
+                {
+                    mesa = db.mesa.Find(id);
+                    mesa.estado = "Inactivo";
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            return mesa;
         }
     }
 }

@@ -1,12 +1,14 @@
+using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
+
 namespace ProyectoWeb2.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Linq;
 
     public partial class pedido_cabecera
     {
@@ -27,7 +29,11 @@ namespace ProyectoWeb2.Models
         [Column(TypeName = "money")]
         public decimal precio_final { get; set; }
 
+        public string estado { get; set; }
+
         public virtual mesa mesa { get; set; }
+
+        
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pedido_detalle> pedido_detalle { get; set; }
@@ -39,7 +45,7 @@ namespace ProyectoWeb2.Models
             {
                 using (var db = new RrestauranteModel())
                 {
-                    empre = db.pedido_cabecera.ToList();
+                    empre = db.pedido_cabecera.Include(x => x.pedido_detalle.Select(y=>y.plato)).OrderByDescending(z=>z.fecha).ThenBy(a => a.estado).ToList();
                 }
             }
             catch (Exception ex)
@@ -127,6 +133,47 @@ namespace ProyectoWeb2.Models
 
             }
 
+        }
+
+        
+        public pedido_cabecera TerminarPedido(int id)
+        {
+            var pedido = new pedido_cabecera();
+            try
+            {
+                using (var db = new RrestauranteModel())
+                {
+                    pedido = db.pedido_cabecera.Find(id);
+                    pedido.estado = "Inactivo";
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            return pedido;
+        }
+
+        public pedido_cabecera CancelarPedido(int id)
+        {
+            var pedido = new pedido_cabecera();
+            try
+            {
+                using (var db = new RrestauranteModel())
+                {
+                    pedido = db.pedido_cabecera.Find(id);
+                    pedido.estado = "Cancelado";
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            return pedido;
         }
     }
 }

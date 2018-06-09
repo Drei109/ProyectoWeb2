@@ -7,13 +7,13 @@ namespace ProyectoWeb2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class FixedColumnsRestauranteEmpresa : IMigrationMetadata
+    public sealed partial class SecondMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FixedColumnsRestauranteEmpresa));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SecondMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805230503039_FixedColumnsRestauranteEmpresa"; }
+            get { return "201805251538298_SecondMigration"; }
         }
         
         string IMigrationMetadata.Source

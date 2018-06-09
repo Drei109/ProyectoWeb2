@@ -1,0 +1,70 @@
+﻿@using ProyectoWeb2.Models
+@{
+    pedido_cabecera pedido_cabecera = new pedido_cabecera();
+    List<pedido_cabecera> pedidos = pedido_cabecera.Listar();
+    var ribboncolor = "ribbon-info";
+}
+
+<div class="row card-columns">
+    @foreach (var pedido in pedidos)
+    {
+        if (pedido.estado.Equals("Inactivo")){ ribboncolor = "ribbon-default";}
+        if (pedido.estado.Equals("Cancelado")) { ribboncolor = "ribbon-danger"; }
+        <div class="col-lg-4 col-md-6 col-xlg-2 col-xs-12">
+            <div class="ribbon-wrapper card">
+                <div class="ribbon @ribboncolor">
+                    Mesa @pedido.pedido_cabecera_id
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-xlg-4 col-xs-4">
+                        <b class="ribbon-content">Fecha: </b> 
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-xlg-8 col-xs-8">
+                        <span>@pedido.fecha</span>
+                    </div>
+                </div>
+
+                <div class="m-t-10">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-xlg-8 col-xs-8">
+                            <b class="ribbon-content">Plato</b> 
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xlg-4 col-xs-4">
+                            <b>Cantidad</b>
+                        </div>
+                    </div>
+                    @foreach (var plato in pedido.pedido_detalle)
+                    {
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-xlg-10 col-xs-10">
+                                <span class="ribbon-content">@plato.plato.nombre</span>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-xlg-2 col-xs-2">
+                                <b>@plato.cantidad</b>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="row m-t-10 ">
+                    <div class="col-lg-8 col-md-8 col-xlg-8 col-xs-8">
+                        <b class="ribbon-content">Total: </b>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xlg-4 col-xs-4">
+                        <span>@pedido.precio_final</span>
+                    </div>
+                </div>
+                
+                <div class="row m-t-10">
+                    <div class="col-lg-4 col-md-4 col-xlg-4 col-xs-4">
+                        <a href="Pedidos/Terminar/@pedido.pedido_cabecera_id" class="btn btn-outline-success"><i class="fa fa-check"></i> Terminar</a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xlg-4 col-xs-4">
+                        <a href="Pedidos/Cancelar/@pedido.pedido_cabecera_id" class="btn btn-outline-danger"><i class="fa fa-ban"></i> Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

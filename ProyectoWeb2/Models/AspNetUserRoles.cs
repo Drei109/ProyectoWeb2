@@ -6,10 +6,10 @@ namespace ProyectoWeb2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class AspNetRoles
+    public partial class AspNetUserRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public AspNetUserRoles()
         {
             AspNetUsers = new HashSet<AspNetUsers>();
         }

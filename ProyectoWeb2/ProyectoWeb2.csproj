@@ -15,7 +15,7 @@
     <RootNamespace>ProyectoWeb2</RootNamespace>
     <AssemblyName>ProyectoWeb2</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -50,6 +50,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QrCode.Net.0.4.0.0\lib\net45\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -78,11 +81,15 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -95,6 +102,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -139,6 +152,7 @@
     <Content Include="assets\images\logo-light-icon.png" />
     <Content Include="assets\images\logo-light-text.png" />
     <Content Include="assets\images\logo-text.png" />
+    <Content Include="assets\images\logoB.png" />
     <Content Include="assets\images\users\userDef.png" />
     <Content Include="assets\main\css\animate.css" />
     <Content Include="assets\main\css\colors\blue-dark.css" />
@@ -609,6 +623,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\empresaController.cs" />
     <Compile Include="Controllers\empresa_restaurante_usuarioController.cs" />
@@ -616,10 +631,14 @@
     <Compile Include="Controllers\estado_usuarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\mesaController.cs" />
+    <Compile Include="Controllers\mesasApiController.cs" />
     <Compile Include="Controllers\pedido_detalleController.cs" />
     <Compile Include="Controllers\pedido_cabeceraController.cs" />
+    <Compile Include="Controllers\platoCategoriaApiController.cs" />
     <Compile Include="Controllers\platoController.cs" />
+    <Compile Include="Controllers\platosApiController.cs" />
     <Compile Include="Controllers\plato_categoriaController.cs" />
+    <Compile Include="Controllers\ProcesosController.cs" />
     <Compile Include="Controllers\restauranteController.cs" />
     <Compile Include="Controllers\restaurante_tipoController.cs" />
     <Compile Include="Controllers\tipo_restauranteController.cs" />
@@ -628,26 +647,31 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805230435159_InitialModel.cs" />
-    <Compile Include="Migrations\201805230435159_InitialModel.Designer.cs">
-      <DependentUpon>201805230435159_InitialModel.cs</DependentUpon>
+    <Compile Include="Helpers\QRCodeHelper.cs" />
+    <Compile Include="Migrations\201805251512051_firstMigration.cs" />
+    <Compile Include="Migrations\201805251512051_firstMigration.Designer.cs">
+      <DependentUpon>201805251512051_firstMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805230457155_FixedRucColumnNameInEmpresa.cs" />
-    <Compile Include="Migrations\201805230457155_FixedRucColumnNameInEmpresa.Designer.cs">
-      <DependentUpon>201805230457155_FixedRucColumnNameInEmpresa.cs</DependentUpon>
+    <Compile Include="Migrations\201805251538298_SecondMigration.cs" />
+    <Compile Include="Migrations\201805251538298_SecondMigration.Designer.cs">
+      <DependentUpon>201805251538298_SecondMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805230503039_FixedColumnsRestauranteEmpresa.cs" />
-    <Compile Include="Migrations\201805230503039_FixedColumnsRestauranteEmpresa.Designer.cs">
-      <DependentUpon>201805230503039_FixedColumnsRestauranteEmpresa.cs</DependentUpon>
+    <Compile Include="Migrations\201805251539590_AddColumnEstado.cs" />
+    <Compile Include="Migrations\201805251539590_AddColumnEstado.Designer.cs">
+      <DependentUpon>201805251539590_AddColumnEstado.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\DtoModels.cs" />
+    <Compile Include="Models\empresa_restaurante_usuario.cs" />
+    <Compile Include="Models\RrestauranteModel.cs" />
+    <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRoles.cs" />
+    <Compile Include="Models\AspNetUserRoles.cs" />
     <Compile Include="Models\AspNetUserClaims.cs" />
     <Compile Include="Models\AspNetUserLogins.cs" />
     <Compile Include="Models\AspNetUsers.cs" />
     <Compile Include="Models\empresa.cs" />
-    <Compile Include="Models\empresa_restaurante_usuario.cs" />
     <Compile Include="Models\estado_empresa.cs" />
     <Compile Include="Models\estado_usuario.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -658,7 +682,6 @@
     <Compile Include="Models\plato_categoria.cs" />
     <Compile Include="Models\restaurante.cs" />
     <Compile Include="Models\restaurante_tipo.cs" />
-    <Compile Include="Models\RrestauranteModel.cs" />
     <Compile Include="Models\tipo_restaurante.cs" />
     <Compile Include="Models\usuario.cs" />
     <Compile Include="Models\usuario_tipo.cs" />
@@ -967,6 +990,8 @@
     <Content Include="Views\usuario\Agregar.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Procesos\Pedidos.cshtml" />
+    <Content Include="Views\Procesos\Mesas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -976,16 +1001,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805230435159_InitialModel.resx">
-      <DependentUpon>201805230435159_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805251512051_firstMigration.resx">
+      <DependentUpon>201805251512051_firstMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805230457155_FixedRucColumnNameInEmpresa.resx">
-      <DependentUpon>201805230457155_FixedRucColumnNameInEmpresa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805251538298_SecondMigration.resx">
+      <DependentUpon>201805251538298_SecondMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805230503039_FixedColumnsRestauranteEmpresa.resx">
-      <DependentUpon>201805230503039_FixedColumnsRestauranteEmpresa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805251539590_AddColumnEstado.resx">
+      <DependentUpon>201805251539590_AddColumnEstado.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -1003,7 +1029,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>62268</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62268/</IISUrl>
+          <IISUrl>http://localhost/ProyectoWeb2</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

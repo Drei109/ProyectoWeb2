@@ -1,12 +1,13 @@
+using System.Data.Entity;
+using System.Linq;
+
 namespace ProyectoWeb2.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Linq;
 
     public partial class pedido_detalle
     {
@@ -25,6 +26,7 @@ namespace ProyectoWeb2.Models
         public virtual pedido_cabecera pedido_cabecera { get; set; }
 
         public virtual plato plato { get; set; }
+
         public List<pedido_detalle> Listar()
         {
             var empre = new List<pedido_detalle>();

@@ -20,6 +20,9 @@ namespace ProyectoWeb2.Models
         [Column(Order = 2)]
         public string UserId { get; set; }
 
+        [StringLength(128)]
+        public string AspNetUsers_Id { get; set; }
+
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

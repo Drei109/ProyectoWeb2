@@ -10,8 +10,15 @@ namespace ProyectoWeb2.Models
         public RrestauranteModel()
             : base("name=RrestauranteModel")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<empresa> empresa { get; set; }
         public virtual DbSet<empresa_restaurante_usuario> empresa_restaurante_usuario { get; set; }
         public virtual DbSet<estado_empresa> estado_empresa { get; set; }
@@ -23,12 +30,33 @@ namespace ProyectoWeb2.Models
         public virtual DbSet<plato_categoria> plato_categoria { get; set; }
         public virtual DbSet<restaurante> restaurante { get; set; }
         public virtual DbSet<restaurante_tipo> restaurante_tipo { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tipo_restaurante> tipo_restaurante { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<usuario_tipo> usuario_tipo { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AspNetUserRoles>()
+                .HasMany(e => e.AspNetUsers)
+                .WithMany(e => e.AspNetRoles)
+                .Map(m => m.ToTable("AspNetRolesAspNetUsers"));
+
+            modelBuilder.Entity<AspNetUsers>()
+                .HasMany(e => e.AspNetUserClaims)
+                .WithOptional(e => e.AspNetUsers)
+                .HasForeignKey(e => e.AspNetUsers_Id);
+
+            modelBuilder.Entity<AspNetUsers>()
+                .HasMany(e => e.AspNetUserLogins)
+                .WithOptional(e => e.AspNetUsers)
+                .HasForeignKey(e => e.AspNetUsers_Id);
+
+            modelBuilder.Entity<AspNetUsers>()
+                .HasMany(e => e.empresa_restaurante_usuario)
+                .WithOptional(e => e.AspNetUsers)
+                .HasForeignKey(e => e.usuarioASP_fk_Id);
+
             modelBuilder.Entity<empresa>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
@@ -189,12 +217,6 @@ namespace ProyectoWeb2.Models
             modelBuilder.Entity<usuario>()
                 .Property(e => e.dni)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<usuario>()
-                .HasMany(e => e.empresa_restaurante_usuario)
-                .WithRequired(e => e.usuario)
-                .HasForeignKey(e => e.usuario_id_fk)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<usuario_tipo>()
                 .Property(e => e.descripcion)
