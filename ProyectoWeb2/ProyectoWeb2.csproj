@@ -624,6 +624,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\categoriaApiController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\empresaController.cs" />
     <Compile Include="Controllers\empresa_restaurante_usuarioController.cs" />
@@ -634,6 +635,7 @@
     <Compile Include="Controllers\mesasApiController.cs" />
     <Compile Include="Controllers\pedido_detalleController.cs" />
     <Compile Include="Controllers\pedido_cabeceraController.cs" />
+    <Compile Include="Controllers\platoApiController.cs" />
     <Compile Include="Controllers\platoCategoriaApiController.cs" />
     <Compile Include="Controllers\platoController.cs" />
     <Compile Include="Controllers\platosApiController.cs" />

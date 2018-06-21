@@ -49,7 +49,7 @@ namespace ProyectoWeb2.Controllers
 
             //return Ok(plato);
 
-            var platos = (from p in db.plato where p.plato_id == id
+            var platos = (from p in db.plato where p.categoria_plato_id_fk == id
                 select new PlatosRestauranteDto()
                 {
                     plato_id = p.plato_id,

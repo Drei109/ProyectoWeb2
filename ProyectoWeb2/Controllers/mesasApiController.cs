@@ -22,7 +22,12 @@ namespace ProyectoWeb2.Controllers
         {
             var mesa = (from m in db.mesa
                 join r in db.restaurante on m.restaurante_id_fk equals r.restaurante_id
-                select new mesaRestauranteDTO() { mesa_id = m.mesa_id, nombreRestaurante = r.nombre, restaurante_id = r.restaurante_id}).ToList();
+                select new mesaRestauranteDTO()
+                {
+                    mesa_id = m.mesa_id,
+                    nombreRestaurante = r.nombre,
+                    restaurante_id = r.restaurante_id
+                }).ToList();
             return mesa;
         }
 
@@ -32,8 +37,13 @@ namespace ProyectoWeb2.Controllers
         {
             var mesa = (from m in db.mesa
                 join r in db.restaurante on m.restaurante_id_fk equals r.restaurante_id
-                        where m.mesa_id == id
-                select new mesaRestauranteDTO() { mesa_id = m.mesa_id, nombreRestaurante = r.nombre, restaurante_id = r.restaurante_id }).SingleOrDefault();
+                where m.mesa_id == id
+                select new mesaRestauranteDTO()
+                {
+                    mesa_id = m.mesa_id,
+                    nombreRestaurante = r.nombre,
+                    restaurante_id = r.restaurante_id
+                }).SingleOrDefault();
             return Ok(mesa);
         }
 
@@ -84,7 +94,7 @@ namespace ProyectoWeb2.Controllers
             db.mesa.Add(mesa);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = mesa.mesa_id }, mesa);
+            return CreatedAtRoute("DefaultApi", new {id = mesa.mesa_id}, mesa);
         }
 
         // DELETE: api/mesasApi/5
@@ -109,6 +119,7 @@ namespace ProyectoWeb2.Controllers
             {
                 db.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
