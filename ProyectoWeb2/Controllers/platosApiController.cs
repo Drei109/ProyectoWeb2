@@ -39,7 +39,7 @@ namespace ProyectoWeb2.Controllers
         // GET: api/platosApi/5
         //[ResponseType(typeof(plato))]
         [ResponseType(typeof(PlatosRestauranteDto))]
-        public List<PlatosRestauranteDto> Getplato(int id)
+        public List<PlatosRestauranteDto> Getplato(int id, int idRes)
         {
             //plato plato = await db.plato.FindAsync(id);
             //if (plato == null)
@@ -49,7 +49,7 @@ namespace ProyectoWeb2.Controllers
 
             //return Ok(plato);
 
-            var platos = (from p in db.plato where p.categoria_plato_id_fk == id
+            var platos = (from p in db.plato where p.categoria_plato_id_fk == id && p.restaurante_id_fk == idRes
                 select new PlatosRestauranteDto()
                 {
                     plato_id = p.plato_id,
