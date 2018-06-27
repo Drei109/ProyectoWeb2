@@ -83,11 +83,7 @@ namespace ProyectoWeb2.Controllers
         }
 
         // POST: api/mesasApi
-<<<<<<< HEAD
-        [ResponseType(typeof(mesa))]
-=======
         [ResponseType(typeof(List<mesa>))]
->>>>>>> f867b1ba152e56f668904db0f186a95288920d30
         public async Task<IHttpActionResult> Postmesa(List<mesa> mesa)
         {
             if (!ModelState.IsValid)
@@ -100,12 +96,8 @@ namespace ProyectoWeb2.Controllers
                 db.mesa.Add(m);
                 await db.SaveChangesAsync();
             }
-
-<<<<<<< HEAD
-            return CreatedAtRoute("DefaultApi", new {id = mesa[1].mesa_id}, mesa);
-=======
+            
             return CreatedAtRoute("DefaultApi", new {id = mesa[0].mesa_id}, mesa);
->>>>>>> f867b1ba152e56f668904db0f186a95288920d30
         }
 
         // DELETE: api/mesasApi/5

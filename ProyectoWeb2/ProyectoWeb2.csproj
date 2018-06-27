@@ -633,6 +633,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\mesaController.cs" />
     <Compile Include="Controllers\mesasApiController.cs" />
+    <Compile Include="Controllers\pedido_cabeceraApiController.cs" />
+    <Compile Include="Controllers\pedido_detalleApiController.cs" />
     <Compile Include="Controllers\pedido_detalleController.cs" />
     <Compile Include="Controllers\pedido_cabeceraController.cs" />
     <Compile Include="Controllers\platoApiController.cs" />
