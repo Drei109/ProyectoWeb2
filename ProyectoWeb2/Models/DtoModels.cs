@@ -43,4 +43,19 @@ namespace ProyectoWeb2.Models
         public string nombre { get; set; }
         public int restaurante_id_fk { get; set; }
     }
+
+
+    public class MesasDTO
+    {
+
+        public List<MesaDTO> data { get; set; }
+    }
+
+    public class MesaDTO
+    {
+
+        public string mesa_id { get; set; }
+        public string restaurante_id_fk { get; set; }
+        public string estado { get; set; }
+    }
 }
